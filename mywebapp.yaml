@@ -52,6 +52,9 @@ metadata:
   creationTimestamp: null
   name: mywebapp
 spec:
+  tls:
+  - hosts: ['mywebapp.lab.local']
+    secretName: mywebapp-tls
   rules:
   - host: mywebapp.lab.local
     http:
