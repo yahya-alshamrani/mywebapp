@@ -1,0 +1,26 @@
+# ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: ca-issuer
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  name: mywebapp
+spec:
+  tls:
+  - hosts: 
+    - 'mywebapp.lab.local'
+    secretName: mywebapp-tls
+  rules:
+  - host: mywebapp.lab.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: mywebapp
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+
